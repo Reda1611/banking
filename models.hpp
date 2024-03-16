@@ -5,25 +5,24 @@
 
 class Client;
 class Advisor;
-class Bank;
 class Card;
 
 class Bank {
 public:
     Bank();
-    void createAccount(Client& client);
-    void assignCard(Client& client, std::unique_ptr<Card> card);
+    void createAccount(std::shared_ptr<Client> client);
+    void assignCard(std::shared_ptr<Client> client, std::unique_ptr<Card> card); 
 };
 
 class Account {
 private:
-    Bank& bank;
-    Client& client;
+    Bank* bank; 
+    std::shared_ptr<Client> client; 
     std::unique_ptr<Card> card;
     double amount;
 
 public:
-    Account(Bank& b, Client& c, std::unique_ptr<Card> crd, double amnt);
+    Account(Bank* b, std::shared_ptr<Client> c, std::unique_ptr<Card> crd, double amnt);
 };
 
 class User {
@@ -40,27 +39,27 @@ public:
 
 class Advisor : public User {
 private:
-    Bank& bank;
+    Bank* bank; 
 
 public:
-    Advisor(const std::string& uname, const std::string& pwd, Bank& b);
+    Advisor(const std::string& uname, const std::string& pwd, Bank* b);
 };
 
 class Client : public User {
 private:
-    Bank& bank;
-    Advisor* advisor;
+    Bank* bank; 
+    std::shared_ptr<Advisor> advisor; 
     double cash;
 
 public:
-    Client(const std::string& uname, const std::string& pwd, Bank& b, Advisor* adv = nullptr);
-    void assignAdvisor(Advisor* adv);
+    Client(const std::string& uname, const std::string& pwd, Bank* b, std::shared_ptr<Advisor> adv = nullptr); 
+    void assignAdvisor(std::shared_ptr<Advisor> adv); 
 };
 
 class ATM {
 private:
-    Bank& bank;
+    Bank* bank; 
 
 public:
-    ATM(Bank& b);
+    ATM(Bank* b);
 };
