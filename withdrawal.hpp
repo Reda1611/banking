@@ -1,73 +1,53 @@
 #pragma once
 
+// Interface abstraite pour les cartes
 class Card {
 public:
     virtual int maxWithdrawal() const = 0;
-    virtual int maxCredit() const = 0;
     virtual ~Card() {}
 };
 
+// Exemple de carte : Carte Gold
 class GoldCard : public Card {
 public:
-    int maxWithdrawal() const override;
-    int maxCredit() const override;
+    int maxWithdrawal() const override {
+        return 1000; // Exemple : montant maximum de retrait pour la carte Gold
+    }
 };
 
+// Exemple de carte : Carte Platinium
 class PlatinumCard : public Card {
 public:
-    int maxWithdrawal() const override;
-    int maxCredit() const override;
+    int maxWithdrawal() const override {
+        return 2000; // Exemple : montant maximum de retrait pour la carte Platinium
+    }
 };
 
+// Exemple de carte : Carte Black
 class BlackCard : public Card {
 public:
-    int maxWithdrawal() const override;
-    int maxCredit() const override;
+    int maxWithdrawal() const override {
+        return 5000; // Exemple : montant maximum de retrait pour la carte Black
+    }
 };
 
+// Template générique pour le retrait
 template<typename CardType>
 class Withdrawal {
 private:
-    CardType& creditCard;
+    const CardType& creditCard;
 
 public:
-    Withdrawal(CardType& card) : creditCard(card) {} 
-    int operator()(int amount);
+    Withdrawal(const CardType& card) : creditCard(card) {} 
+
+    // Opérateur () surchargé pour effectuer le retrait
+    void operator()(int amount) const {
+        if (amount <= creditCard.maxWithdrawal()) {
+            // Logique de retrait ici
+            // Pour cet exemple, nous n'implémentons que l'affichage du montant retiré
+            std::cout << "Retrait de " << amount << " euros effectué avec succès." << std::endl;
+        } else {
+            std::cout << "Montant de retrait supérieur au maximum autorisé pour cette carte." << std::endl;
+        }
+    }
 };
-
-
-
-int GoldCard::maxWithdrawal() const {
-    return 1000; 
-}
-
-int GoldCard::maxCredit() const {
-    return 5000; 
-}
-
-int PlatinumCard::maxWithdrawal() const {
-    
-    return 2000; 
-}
-
-int PlatinumCard::maxCredit() const {
-    
-    return 10000; 
-}
-
-int BlackCard::maxWithdrawal() const {
-    
-    return 5000; 
-}
-
-int BlackCard::maxCredit() const {
-
-    return 20000; 
-}
-
-template<typename CardType>
-int Withdrawal<CardType>::operator()(int amount) {
-
-
-        return amount; 
-}
