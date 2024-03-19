@@ -1,37 +1,23 @@
-# banking
+Programme de gestion bancaire
+Ce programme est une application de gestion bancaire conçue pour créer des comptes clients, attribuer des cartes et effectuer des retraits.
 
-ce programme consiste à :
+Fonctionnalités principales
+Création de comptes clients : Le programme permet de créer des comptes clients en associant un utilisateur à une banque.
 
-Définir les classes nécessaires pour un système bancaire, telles que Bank, Client, Account, Card, etc.
+Attribution de cartes : Une fois un compte client créé, le programme permet d'attribuer une carte à ce compte. Les cartes peuvent être de différents types (Gold, Platinum, Black) avec des limites de retrait spécifiques.
 
-Utiliser la fonction make_bank() pour créer une instance de la classe Bank.
+Retraits : Le programme permet d'effectuer des retraits d'argent à partir des comptes clients. Le montant des retraits est vérifié par rapport à la limite de retrait autorisée pour la carte associée au compte client.
 
-Effectuer des opérations bancaires telles que la création de comptes, l'attribution de cartes, le retrait d'argent, etc., 
+Structure du programme
+Le programme est divisé en plusieurs fichiers :
 
-Utiliser les classes de carte définies dans withdrawal.hpp pour déterminer les montants maximaux de retrait et de crédit pour chaque type de carte, et pour effectuer des opérations de retrait avec ces cartes.
+models.hpp / models.cpp : Ces fichiers contiennent les définitions des classes représentant les entités du programme, telles que la banque, les clients, les cartes, etc.
 
-Utiliser les classes utilisateur telles que Client et Advisor pour représenter les utilisateurs du système bancaire et effectuer des opérations spécifiques, comme attribuer un conseiller à un client ou vérifier les informations d'identification d'un utilisateur.
+services.hpp / services.cpp : Ces fichiers contiennent des fonctions utilitaires pour créer des instances de la banque et effectuer d'autres opérations de service.
 
+withdrawal.hpp / withdrawal.cpp : Ces fichiers contiennent le template générique pour effectuer des retraits d'argent.
 
-models.hpp : Définit les classes de base pour un système bancaire, telles que la banque, les comptes, les utilisateurs, les conseillers et les distributeurs automatiques de billets.
+main.cpp : Ce fichier contient la fonction principale du programme qui utilise les différentes fonctionnalités implémentées pour simuler les opérations bancaires.
 
-withdrawal.hpp : Définit des classes pour différents types de cartes de crédit et une classe de modèle pour simuler des opérations de retrait avec ces cartes.
-
-services.hpp : Définit une fonction make_bank() pour créer une instance de la classe Bank dans le système bancaire.
-
-
-1. models.hpp
-La classe Bank a été modifiée pour inclure une fonction withdraw qui accepte n'importe quel type de carte en utilisant un modèle générique. Cette fonction utilise un objet Withdrawal pour effectuer le retrait en fonction de la carte associée au client.
-
-La classe Account a été modifiée pour inclure une méthode getCard permettant d'accéder à la carte associée à un compte.
-
-La classe Client a été modifiée pour inclure une méthode getAccount permettant d'accéder au compte associé à un client.
-
-2. services.hpp
-Une fonction make_bank a été ajoutée pour créer une instance de la classe Bank et la retourner comme un unique_ptr.
-3. withdrawal.hpp
-Une interface abstraite Card a été définie avec une méthode virtuelle maxWithdrawal pour obtenir le montant maximum de retrait autorisé pour une carte.
-
-Trois classes concrètes GoldCard, PlatinumCard et BlackCard ont été définies pour implémenter cette interface en retournant le montant maximum de retrait spécifique à chaque type de carte.
-
-Un template Withdrawal a été défini pour accepter n'importe quel type de carte. Ce template utilise un opérateur () surchargé pour effectuer un retrait en vérifiant si le montant demandé est inférieur ou égal au montant maximum autorisé pour la carte.
+Utilisation
+Pour utiliser le programme, compilez tous les fichiers sources (*.cpp) ensemble. Ensuite, exécutez le fichier binaire généré pour lancer l'application. Suivez les instructions à l'écran pour interagir avec le programme, telles que la création de comptes, l'attribution de cartes et les retraits d'argent.
