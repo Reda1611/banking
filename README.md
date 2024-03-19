@@ -1,4 +1,4 @@
-Programme de gestion bancaire
+#Programme de gestion bancaire
 Ce programme est une application de gestion bancaire conçue pour créer des comptes clients, attribuer des cartes et effectuer des retraits.
 
 Fonctionnalités principales
