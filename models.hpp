@@ -2,7 +2,7 @@
 
 #include <string>
 #include <memory>
-#include "withdrawal.hpp" // Ajout de l'inclusion du fichier withdrawal.hpp
+#include "withdrawal.hpp" 
 
 class Advisor;
 class Card;
@@ -13,12 +13,12 @@ public:
     void createAccount(std::shared_ptr<Client> client);
     void assignCard(std::shared_ptr<Client> client, std::unique_ptr<Card> card);
 
-    // Fonction pour effectuer un retrait
-    template<typename CardType>
+
+template<typename CardType>
     void withdraw(std::shared_ptr<Client> client, int amount) {
         if (client && client->getAccount()) {
             Withdrawal<CardType> withdrawal(*(client->getAccount()->getCard()), amount);
-            withdrawal(); // Effectue le retrait en utilisant le template Withdrawal
+            withdrawal(); 
         } else {
             std::cout << "Client non valide ou pas de compte associé." << std::endl;
         }
@@ -34,7 +34,7 @@ private:
 
 public:
     Account(Bank* b, std::shared_ptr<Client> c, std::unique_ptr<Card> crd, double amnt);
-    std::unique_ptr<Card>& getCard(); // Ajout de la méthode pour récupérer la carte
+    std::unique_ptr<Card>& getCard(); 
 };
 
 class User {
@@ -62,12 +62,12 @@ private:
     Bank* bank; 
     std::shared_ptr<Advisor> advisor; 
     double cash;
-    std::shared_ptr<Account> account; // Ajout du compte associé au client
+    std::shared_ptr<Account> account; 
 
 public:
     Client(const std::string& uname, const std::string& pwd, Bank* b, std::shared_ptr<Advisor> adv = nullptr);
     void assignAdvisor(std::shared_ptr<Advisor> adv);
-    std::shared_ptr<Account>& getAccount(); // Ajout de la méthode pour récupérer le compte
+    std::shared_ptr<Account>& getAccount(); 
 };
 
 class ATM {
