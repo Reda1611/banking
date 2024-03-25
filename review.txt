@@ -1,0 +1,24 @@
+Le code est clair
+Préférez donner des noms complets à vos variables.
+Si vous choisissez un type de notation, il est préférable de garder le même jsuqu'au bout (make_bank puis createAccount)
+
+Certaines fonctions sont implémentées dans les fichiers headers,
+normalement les fichiers headers incluent uniquement les déclarations
+puis toutes les impémentations sont dans le fichiers .cpp
+Cela permet d'inclure uniquement les déclarations puis c'est le linker qui link les fichiers compilés avec le code qui execute.
+N'hésitez pas à créer 1 fichier par theme voir par classe.
+
+Les fonctions createAccount et assignCard ne font rien, assignAdvisor n'est jamais utilisé.
+Dommage que vous n'ayez pas eu le temps de terminer l'exercice car la modélisation est plutôt claire et permet beaucoup d'évolutions.
+Etant donnée que c'est la class Account qui regroupe les informations de la carte et du client, il est peut être préférable d'associer la méthodes assignCard à celle ci (ou de lui passer directement le compte)
+Par exemple bank->assignCard(account, move(card));
+ou encore account->assignCard(move(card));
+La fonction withdrawal vérifie le montant max de la carte mais pas si l'utilisateur a de l'argent. De plus elle n'enlève pas d'argent sur le compte de l'utilisateur.
+
+La classe abstraite User peut être utile.
+L'utilisation de virtual ainsi que des smart pointers ou par exemple l'utilisation de move de la carte au compte laissent penser que vous comprennez certains concepts bien plus avancés (lié à a un pointeur unique cela permet d'appeler les opérations de déplacement qui transferent l'ownership donc tout cela est très logique étant donné qu'a priori le compte/utilisateur sera le seul responsable de la carte)
+
+Prenez le temps de bien comprendre la séparation entre fichiers sources et headers
+Pensez à compiler votre code petit à petit afin de garder le controle sur les modifications.
+
+14/20
